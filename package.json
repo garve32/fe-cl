@@ -42,6 +42,9 @@
       "last 1 safari version"
     ]
   },
+  "overrides": {
+    "nth-check": "2.0.1"
+  },
   "devDependencies": {
     "@redux-devtools/core": "^3.13.1",
     "autoprefixer": "^10.4.7",

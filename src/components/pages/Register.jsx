@@ -18,15 +18,26 @@ function Register() {
     const formData = new FormData(event.target);
 
     const loginId = formData.get('id');
-    const name = formData.get('name');
+    const userName = formData.get('name');
     const password = formData.get('password');
     const confirm = formData.get('confirm');
 
     const params = {
       login_id: loginId,
-      name,
+      name: userName,
       password,
     };
+
+    if (isEmpty(userName)) {
+      const payload = {
+        isShow: true,
+        title: '알림',
+        message: '이름을 입력해 주세요.',
+        callback: () => {},
+      };
+      dispatch(showAlert(payload));
+      return;
+    }
 
     if (isEmpty(loginId)) {
       const payload = {
@@ -99,7 +110,7 @@ function Register() {
 
   return (
     <LoginForm name="register" onSubmit={handleSubmit}>
-      <LoginInput type="name" id="name" placeholder="이름을 입력하세요">
+      <LoginInput type="name" id="name" name="name" required placeholder="이름을 입력하세요">
         이름
       </LoginInput>
       <LoginInput

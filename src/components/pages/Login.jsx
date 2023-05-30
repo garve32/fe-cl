@@ -77,7 +77,7 @@ function Login() {
       <LoginInput id="id" name="id" required>
         아이디
       </LoginInput>
-      <LoginInput id="password" name="password" required>
+      <LoginInput type="password" id="password" name="password" required>
         비밀번호
       </LoginInput>
       <Button>로그인</Button>

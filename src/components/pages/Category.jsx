@@ -88,8 +88,11 @@ function Category() {
               {category.name}
             </p>
             <div className="mb-6 space-y-4 text-sm leading-6 text-slate-600">
-              <p>
+              {/* <p>
                 {`총 ${category.question_cnt} 문항 중 ${category.success_percent}% 합격`}
+              </p> */}
+              <p>
+                {`준비된 문제 : ${category.pool_cnt} 문항`}
               </p>
               <p>{category.description}</p>
             </div>
@@ -116,7 +119,7 @@ function Category() {
               </svg>
             </button>
           </div>
-          <div className="mb-10 w-full flex-none xl:mb-0 xl:ml-8 xl:w-[29rem]">
+          <div className="mb-10 w-full flex-none xl:mb-0 xl:ml-8 xl:w-[24rem]">
             <div className="aspect-w-[1216] aspect-h-[606] sm:aspect-w-[1376] sm:aspect-h-[664] overflow-hidden rounded-lg bg-slate-100 shadow-lg">
               <picture>
                 <source

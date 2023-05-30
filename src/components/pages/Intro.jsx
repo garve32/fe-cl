@@ -92,7 +92,8 @@ function Intro() {
                     <div className="col-span-2 mr-2.5 flex-none sm:mr-0">
                       <dt className="sr-only">Host</dt>
                       <dd className="text-xs font-semibold leading-6 text-gray-900">
-                        Amazon Web Service
+                        {/* 상세 description이 api에 없어서 임시 블락  */}
+                        {/* Amazon Web Service */}
                       </dd>
                     </div>
                     <div className="col-start-3 row-start-2 -ml-2.5 sm:ml-0 sm:pl-6">

@@ -35,7 +35,8 @@ export const getHyphenated = (a, b) => {
 
 // eslint-disable-next-line default-param-last
 export const callApi = (method, url, params, type = 'json') => {
-  const baseurl = 'http://13.125.18.81:9002/api/';
+  // const baseurl = 'http://13.125.18.81:9002/api/';
+  const baseurl = 'http://localhost:9002/api/';
 
   const instance = axios.create({
     baseURL: baseurl,

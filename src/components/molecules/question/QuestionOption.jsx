@@ -36,7 +36,10 @@ function QuestionOption({ type, option, handleChange }) {
       onKeyDown={() => {}}
     >
       <div className="flex items-center justify-between">
-        <div className="font-medium text-slate-900">{option.text}</div>
+        <div 
+          className="font-medium text-slate-900"
+          dangerouslySetInnerHTML={{ __html: option.text }}
+        />
         <input id={option.seq} name={option.id} type="hidden" value={checked} />
         {option.correct ? (
           <Status value={option.correct_yn} />

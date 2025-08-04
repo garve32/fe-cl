@@ -110,8 +110,8 @@ function Register() {
 
   return (
     <LoginForm name="register" onSubmit={handleSubmit}>
-      <LoginInput type="name" id="name" name="name" required placeholder="이름을 입력하세요">
-        이름
+      <LoginInput type="name" id="name" name="name" required placeholder="닉네임을 입력하세요">
+        닉네임
       </LoginInput>
       <LoginInput
         type="id"
@@ -140,7 +140,28 @@ function Register() {
       >
         비밀번호 확인
       </LoginInput>
-      <LoginButton>등록하기</LoginButton>
+      
+      {/* 경고 문구 섹션 */}
+      <div className="mt-6 rounded-lg bg-red-50 border border-red-200 p-4">
+        <div className="flex">
+          <div className="flex-shrink-0">
+            <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+          </div>
+          <div className="ml-3">
+            <h3 className="text-sm font-bold text-red-800">⚠️ 주의사항</h3>
+            <div className="mt-2 text-sm text-red-700 font-medium">
+              <p>• 비밀번호 찾기 기능은 제공되지 않습니다</p>
+              <p>• 실제 개인정보나 비밀번호를 사용하지 마세요</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="mt-8">
+        <LoginButton>등록하기</LoginButton>
+      </div>
     </LoginForm>
   );
 }

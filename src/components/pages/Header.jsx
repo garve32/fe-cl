@@ -34,7 +34,7 @@ function Header() {
                   <Link to="c">
                     <li className="hover:text-sky-500">New</li>
                   </Link>
-                  <a href="http://hsi-quiz.com:9002/">
+                  <a href="https://quiz-d0xy.onrender.com">
                     <li className="hover:text-sky-500">Admin</li>
                   </a>
                   <button type="button" onClick={handleLogout}>

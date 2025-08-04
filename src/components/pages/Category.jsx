@@ -119,7 +119,7 @@ function Category() {
               </svg>
             </button>
           </div>
-          <div className="mb-10 w-full flex-none xl:mb-0 xl:ml-8 xl:w-[24rem]">
+          <div className="mb-10 w-full flex-none xl:mb-0 xl:ml-8 xl:w-[16rem]">
             <div className="aspect-w-[1216] aspect-h-[606] sm:aspect-w-[1376] sm:aspect-h-[664] overflow-hidden rounded-lg bg-slate-100 shadow-lg">
               <picture>
                 <source
@@ -127,7 +127,11 @@ function Category() {
                   srcSet={category.logo_url}
                   media="(min-width: 640px)"
                 />
-                <img className="my-0 mx-auto" src={category.logo_url} alt="" />
+                <img 
+                  className="my-0 mx-auto max-w-full max-h-56 object-contain" 
+                  src={category.logo_url} 
+                  alt="" 
+                />
               </picture>
             </div>
           </div>

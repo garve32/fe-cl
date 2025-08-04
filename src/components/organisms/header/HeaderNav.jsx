@@ -44,7 +44,7 @@ function HeaderNav({ isOpen, setIsOpen }) {
             <li>
               <a
                 className="hover:text-sky-500"
-                href="http://43.200.138.19:9002/"
+                href="https://quiz-d0xy.onrender.com"
                 onClick={() => {
                   setIsOpen(false);
                 }}

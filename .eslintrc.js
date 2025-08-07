@@ -24,5 +24,6 @@ module.exports = {
     'tailwindcss/no-custom-classname': 'off',
     'no-console': 'off',
     'no-alert': 'off',
+    'import/no-unresolved': 'off',
   },
 };

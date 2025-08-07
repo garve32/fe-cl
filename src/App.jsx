@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Analytics } from '@vercel/analytics/react';
 
 import { cancelAlert, cancelConfirm } from './features/modal/modalSlice';
 
@@ -46,6 +47,7 @@ function App() {
       </Routes>
       <Alert />
       <Confirm />
+      <Analytics />
     </Router>
   );
 }

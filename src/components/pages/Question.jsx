@@ -60,7 +60,7 @@ function Question() {
     dispatch(
       menuChanged({
         id: 'Question',
-        name: '문제풀기',
+        // name: '문제풀기',
         description: '문제를 잘 읽고 정답을 고르세요.',
       }),
     );

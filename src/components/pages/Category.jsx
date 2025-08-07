@@ -9,7 +9,6 @@ import { showAlert } from '../../features/modal/modalSlice';
 
 import {
   callApi,
-  getCategoryInfoText,
   getFormattedQuizInfo,
 } from '../../functions/commonUtil';
 
@@ -70,35 +69,30 @@ function Category() {
   };
 
   return (
-    <ul className="sm:space-y-6">
+    <div className="space-y-4">
       {categories.map(category => (
-        <li
+        <div
           key={category.id}
-          className="-mx-4 flex flex-col-reverse items-start bg-slate-50 p-4 pb-10 sm:mx-0 sm:rounded-2xl sm:p-10 xl:flex-row"
+          className="flex flex-col bg-slate-50 rounded-xl p-4 sm:p-5 lg:flex-row lg:items-center"
         >
-          <div className="flex-auto">
-            <h3 className="mb-4 text-sm font-semibold leading-6 text-indigo-600">
-              {getCategoryInfoText(
-                category.question_cnt,
-                category.time_limit,
-                category.success_percent,
-              )}
+          {/* 콘텐츠 영역 */}
+          <div className="flex-1 mb-3 lg:mb-0 lg:mr-6">
+            <h3 className="mb-2 text-sm font-semibold leading-6 text-indigo-600">
+              {`${category.question_cnt}개의 질문 | ${category.time_limit}시간 | 합격하려면 ${category.success_percent}%의 정답을 달성해야함`}
             </h3>
-            <p className="mb-2 text-xl font-semibold tracking-tight text-slate-900">
+            <p className="mb-1 text-lg font-semibold tracking-tight text-slate-900">
               {category.name}
             </p>
-            <div className="mb-6 space-y-4 text-sm leading-6 text-slate-600">
-              {/* <p>
-                {`총 ${category.question_cnt} 문항 중 ${category.success_percent}% 합격`}
-              </p> */}
+            <div className="mb-3 space-y-1 text-sm leading-6 text-slate-600">
               <p>
                 {`준비된 문제 : ${category.pool_cnt} 문항`}
               </p>
               <p>{category.description}</p>
             </div>
             <button
-              className="group inline-flex h-9 items-center whitespace-nowrap rounded-full bg-slate-700 px-3 text-sm font-semibold text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 disabled:bg-slate-300"
-              // to="../q"
+              className={`group inline-flex h-9 items-center whitespace-nowrap rounded-full px-3 text-sm font-semibold text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 disabled:bg-slate-300 ${
+                category.active_yn === 'Y' ? 'bg-slate-700' : 'bg-slate-300'
+              }`}
               type="button"
               onClick={() => handleClick(category)}
               disabled={category.active_yn === 'N'}
@@ -119,25 +113,25 @@ function Category() {
               </svg>
             </button>
           </div>
-          <div className="mb-10 w-full flex-none xl:mb-0 xl:ml-8 xl:w-[16rem]">
-            <div className="aspect-w-[1216] aspect-h-[606] sm:aspect-w-[1376] sm:aspect-h-[664] overflow-hidden rounded-lg bg-slate-100 shadow-lg">
-              <picture>
-                <source
-                  type="image/jpeg"
-                  srcSet={category.logo_url}
-                  media="(min-width: 640px)"
-                />
-                <img 
-                  className="my-0 mx-auto max-w-full max-h-56 object-contain" 
-                  src={category.logo_url} 
-                  alt="" 
-                />
-              </picture>
+
+          {/* 이미지 영역 */}
+          <div className="flex-shrink-0 w-full lg:w-48 xl:w-56">
+            <div className="relative h-40 lg:h-36 xl:h-40 overflow-hidden rounded-lg bg-slate-100 shadow-lg">
+              <img 
+                className="w-full h-full object-contain p-2" 
+                src={category.logo_url} 
+                alt={category.name}
+              />
+              {category.active_yn === 'N' && (
+                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center rounded-lg">
+                  <span className="text-white text-sm font-medium">준비중</span>
+                </div>
+              )}
             </div>
           </div>
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }
 

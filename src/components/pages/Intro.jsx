@@ -72,12 +72,12 @@ function Intro() {
   };
 
   return isResponsed ? (
-    <div className="mt-8 space-y-4 sm:mt-10">
+    <div className="mt-6 space-y-3 sm:mt-8">
       <ul className="divide-y divide-gray-100">
         {histories.map(history => {
           return (
             <li key={history.id}>
-              <div className="group relative py-6 sm:rounded-2xl">
+              <div className="group relative py-4 sm:rounded-2xl">
                 <div className="absolute -inset-x-4 -inset-y-px bg-gray-50 opacity-0 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl lg:-inset-x-8" />
                 <div className="relative flex items-center">
                   <div className="relative h-[3.125rem] w-[3.125rem] flex-none sm:h-[3.75rem] sm:w-[3.75rem]">

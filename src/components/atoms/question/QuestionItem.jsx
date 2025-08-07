@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-function QuestionItem({ id, children }) {
+const QuestionItem = forwardRef(({ id, children }, ref) => {
   return (
-    <li className="flex items-center" key={id}>
+    <li className="flex items-center" key={id} ref={ref}>
       {children}
     </li>
   );
-}
+});
+
+QuestionItem.displayName = 'QuestionItem';
 
 export default QuestionItem;

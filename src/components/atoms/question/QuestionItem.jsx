@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 
-const QuestionItem = forwardRef(({ id, children }, ref) => {
+const QuestionItem = forwardRef(({ children }, ref) => {
   return (
-    <li className="flex items-center" key={id} ref={ref}>
+    <li className="flex items-center" ref={ref}>
       {children}
     </li>
   );

@@ -1,19 +1,27 @@
 import React from 'react';
 
-import QuestionOption from './QuestionOption';
+import QuestionOption from './QuestionOptionOptimized';
 
 function QuestionOptions({ type, options, setOptions = () => {}, children }) {
-  const handleChange = id => {
+  const handleChange = (id, willCheck) => {
+    // 단일 선택: 선택된 항목만 true, 나머지는 false. 해제는 허용하지 않음
+    if (type === 'S') {
+      if (!willCheck) return; // 단일 선택에서 해제는 무시
+      setOptions(
+        options.map(option =>
+          option.id === id
+            ? { ...option, checked: true }
+            : { ...option, checked: false },
+        ),
+      );
+      return;
+    }
+
+    // 다중 선택: 해당 항목만 토글
     setOptions(
-      options.map(option => {
-        if (id !== option.id) {
-          return {
-            ...option,
-            checked: false,
-          };
-        }
-        return option;
-      }),
+      options.map(option =>
+        option.id === id ? { ...option, checked: willCheck } : option,
+      ),
     );
   };
 

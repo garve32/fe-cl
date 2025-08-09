@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { userLogin } from '../../features/user/userSlice';
 import { showAlert } from '../../features/modal/modalSlice';
+import sessionManager from '../../utils/sessionManager';
 
 import { callApi, isEmpty } from '../../functions/commonUtil';
 import Button from '../atoms/common/buttons/LoginButton';
@@ -59,13 +60,15 @@ function Login() {
     callApi('post', '/u/login', params)
       .then(response => {
         dispatch(userLogin(response.data));
+        sessionManager.startSession(); // 세션 시작
         navigate('/');
       })
       .catch(error => {
+        const errorMessage = error.response?.data?.message || '로그인 중 오류가 발생했습니다.';
         const payload = {
           isShow: true,
           title: '알림',
-          message: error.response.data.message,
+          message: errorMessage,
           callback: () => {},
         };
         dispatch(showAlert(payload));

@@ -33,11 +33,12 @@ function Category() {
         setCategories(response.data);
       })
       .catch(error => {
+        const errorMessage = error.response?.data?.message || '카테고리를 불러오는 중 오류가 발생했습니다.';
         dispatch(
           showAlert({
             isShow: true,
             title: '알림',
-            message: error.response.data.message,
+            message: errorMessage,
             callback: () => {},
           }),
         );
@@ -57,11 +58,12 @@ function Category() {
         navigate(`/q/${payload.questionSet[0]}`);
       })
       .catch(error => {
+        const errorMessage = error.response?.data?.message || '퀴즈 시작 중 오류가 발생했습니다.';
         dispatch(
           showAlert({
             isShow: true,
             title: '알림',
-            message: error.response.data.message,
+            message: errorMessage,
             callback: () => {},
           }),
         );

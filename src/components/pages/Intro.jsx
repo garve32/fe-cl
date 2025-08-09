@@ -8,6 +8,7 @@ import {
   callApi,
   getFormattedQuizInfo,
   isEmpty,
+  getFormattedProgressTimeText,
 } from '../../functions/commonUtil';
 
 import { initQuiz } from '../../features/quiz/quizSlice';
@@ -42,11 +43,12 @@ function Intro() {
           setIsResponsed(true);
         })
         .catch(error => {
+          const errorMessage = error.response?.data?.message || '히스토리를 불러오는 중 오류가 발생했습니다.';
           dispatch(
             showAlert({
               isShow: true,
               title: '알림',
-              message: error.response.data.message,
+              message: errorMessage,
               callback: () => {},
             }),
           );
@@ -71,6 +73,16 @@ function Intro() {
     navigate(`/r/${history.id}`);
   };
 
+  const getCorrectCnt = correctSet => {
+    if (!correctSet || correctSet.length < 1) return 0;
+    return correctSet.filter(v => String(v) === 'Y' || String(v) === '1').length;
+  };
+
+  const getScore = (correctCnt, totalCnt) => {
+    if (!totalCnt) return 0;
+    return Math.round((correctCnt / totalCnt) * 100);
+  };
+
   return isResponsed ? (
     <div className="mt-6 space-y-3 sm:mt-8">
       <ul className="divide-y divide-gray-100">
@@ -88,23 +100,11 @@ function Intro() {
                     />
                     <div className="absolute inset-0 rounded-full ring-0 ring-inset ring-black/[0.08]" />
                   </div>
-                  <dl className="ml-4 flex flex-auto flex-wrap gap-y-1 gap-x-2 overflow-hidden sm:ml-6 sm:grid sm:grid-cols-[auto_1fr_auto_auto] sm:items-center">
-                    <div className="col-span-2 mr-2.5 flex-none sm:mr-0">
-                      <dt className="sr-only">Host</dt>
-                      <dd className="text-xs font-semibold leading-6 text-gray-900">
-                        {/* 상세 description이 api에 없어서 임시 블락  */}
-                        {/* Amazon Web Service */}
-                      </dd>
-                    </div>
-                    <div className="col-start-3 row-start-2 -ml-2.5 sm:ml-0 sm:pl-6">
+                  <dl className="ml-4 flex min-w-0 flex-auto flex-col gap-y-1 sm:ml-6 sm:grid sm:w-full sm:grid-cols-[1fr_auto_auto] sm:items-center sm:gap-x-6">
+                    {/* 제목 */}
+                    <div className="min-w-0 sm:col-span-1">
                       <dt className="sr-only">Category</dt>
-                      <dd className="flex items-center text-xs leading-6 text-gray-600">
-                        <Status value={history.successCd} />
-                      </dd>
-                    </div>
-                    <div className="col-span-2 col-start-1 w-full flex-none">
-                      <dt className="sr-only">Category</dt>
-                      <dd className="text-[0.9375rem] font-semibold leading-6 text-gray-900">
+                      <dd className="truncate text-[0.9375rem] font-semibold leading-6 text-gray-900">
                         <button
                           type="button"
                           onClick={() => {
@@ -119,19 +119,15 @@ function Intro() {
                         </button>
                       </dd>
                     </div>
-                    <div className="mr-2.5 flex-none">
-                      <dt className="sr-only">Progress</dt>
-                      <dd className="text-xs leading-6 text-gray-600">
-                        {`총 ${
-                          history.questionSet.length
-                        }문제 중 ${getProgressCnt(
-                          history.progressSet,
-                        )} 문제 완료`}
-                      </dd>
-                    </div>
-                    <div className="col-start-4 row-start-2 ml-auto flex-none sm:pl-6">
-                      <dt className="sr-only">Start</dt>
-                      <dd className="text-xs leading-6 text-gray-400">
+
+                    {/* 상태 배지 + 날짜 (모바일/데스크톱 모두 한 줄, 함께 배치) */}
+                    <div className="flex items-center gap-3 text-xs leading-6 sm:col-span-2 sm:justify-self-start">
+                      <div className="flex items-center text-gray-600">
+                        <dt className="sr-only">Status</dt>
+                        <Status value={history.successCd} />
+                      </div>
+                      <div className="text-gray-400">
+                        <dt className="sr-only">Start</dt>
                         <time dateTime={history.start_dt}>
                           {new Intl.DateTimeFormat('ko-KR', {
                             weekday: 'long',
@@ -140,6 +136,26 @@ function Intro() {
                             day: 'numeric',
                           }).format(new Date(history.startDt))}
                         </time>
+                      </div>
+                    </div>
+
+                    {/* 진행/결과 요약 (두 번째 줄 전체 폭) */}
+                    <div className="min-w-0 sm:col-span-3">
+                      <dt className="sr-only">Summary</dt>
+                      <dd className="truncate text-xs leading-6 text-gray-600">
+                        {(() => {
+                          const total = history.questionSet.length;
+                          const completed = getProgressCnt(history.progressSet);
+                          const progressText = `풀이 진행 ${completed}/${total}`;
+                          const correct = getCorrectCnt(history.correctSet);
+                          const score = getScore(correct, total);
+                          const timeText = getFormattedProgressTimeText(Number(history.accumSec) || 0);
+                          const resultText = `${score}% 정답 (${correct}/${total})`;
+                          // 진행중이면 정답률/정답수는 숨김
+                          return isEmpty(history.successCd)
+                            ? `${progressText}  |  소요 ${timeText}`
+                            : `${progressText}  |  ${resultText}  |  소요 ${timeText}`;
+                        })()}
                       </dd>
                     </div>
                   </dl>

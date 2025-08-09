@@ -94,11 +94,12 @@ function Register() {
             }
           })
           .catch(error => {
+            const errorMessage = error.response?.data?.message || '등록 중 오류가 발생했습니다.';
             dispatch(
               showAlert({
                 isShow: true,
                 title: '알림',
-                message: error.response.data.message,
+                message: errorMessage,
                 callback: () => {},
               }),
             );

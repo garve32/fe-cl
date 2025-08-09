@@ -46,7 +46,6 @@ function QuestionSider() {
       
       return (
         <QuestionItem 
-          id={qid} 
           key={qid}
           ref={isCurrentQuestion ? currentQuestionRef : null}
         >

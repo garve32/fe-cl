@@ -65,11 +65,12 @@ function Review() {
         setHistory(payload);
       })
       .catch(error => {
+        const errorMessage = error.response?.data?.message || '리뷰 데이터를 불러오는 중 오류가 발생했습니다.';
         dispatch(
           showAlert({
             isShow: true,
             title: '알림',
-            message: error.response.data.message,
+            message: errorMessage,
             callback: () => {},
           }),
         );

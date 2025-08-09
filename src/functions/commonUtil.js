@@ -1,4 +1,26 @@
 import axios from 'axios';
+// TODO: 백엔드 세션 기반 인증 구현 시 재활성화
+// import store from '../app/store';
+// import { userLogout } from '../features/user/userSlice';
+// import { showAlert } from '../features/modal/modalSlice';
+
+// 세션 만료 처리 함수 (현재 비활성화)
+// TODO: 백엔드 세션 기반 인증 구현 시 재활성화
+// const handleSessionExpired = () => {
+//   // Redux store에서 로그아웃 액션 디스패치
+//   store.dispatch(userLogout());
+//   
+//   // 세션 만료 알림 표시
+//   store.dispatch(showAlert({
+//     isShow: true,
+//     title: '세션 만료',
+//     message: '로그인 세션이 만료되었습니다. 다시 로그인해 주세요.',
+//     callback: () => {
+//       // 로그인 페이지로 리다이렉트
+//       window.location.href = '/login';
+//     },
+//   }));
+// };
 
 export const isEmpty = value => {
   if (
@@ -36,12 +58,13 @@ export const getHyphenated = (a, b) => {
 // eslint-disable-next-line default-param-last
 export const callApi = (method, url, params, type = 'json') => {
   // const baseurl = 'http://13.125.18.81:9002/api/';
-  // const baseurl = 'http://localhost:9002/api/';
-  const baseurl = 'https://quiz-d0xy.onrender.com/api';
+  const baseurl = 'http://localhost:9002/api/';
+  // const baseurl = 'https://quiz-d0xy.onrender.com/api';
+  // const baseurl = 'https://cloudy-limpet-ict-quiz-d29adb3b.koyeb.app/admin/questions';
 
   const instance = axios.create({
     baseURL: baseurl,
-    withCredentials: false,
+    withCredentials: false, // CORS 문제 해결을 위해 임시로 false로 설정
     responseType: type,
   });
 
@@ -56,7 +79,14 @@ export const callApi = (method, url, params, type = 'json') => {
     response => {
       return response;
     },
-    // error => Promise.reject(error),
+    error => {
+      // 세션 만료 처리 (현재는 비활성화)
+      // TODO: 백엔드에서 세션 기반 인증이 활성화되면 주석 해제
+      // if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+      //   handleSessionExpired();
+      // }
+      return Promise.reject(error);
+    },
   );
 
   if (method.toLowerCase() === 'post') {

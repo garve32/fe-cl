@@ -78,7 +78,7 @@ const Question = React.memo(() => {
   }, [quiz.questionSet, id]);
 
 
-  // API 호출을 useCallback으로 최적화
+  // API 호출을 useCallback으로 최적화 (id 변경시에만 호출)
   const fetchQuestion = useCallback(async () => {
     if (isEmpty(quiz.id)) {
       navigate('../../c');
@@ -103,7 +103,7 @@ const Question = React.memo(() => {
         callback: () => {},
       }));
     }
-  }, [id, quiz.id, navigate, dispatch, getCheckedOptions]);
+  }, [id, quiz.id, navigate, dispatch, getCheckedOptions, isValidQuestionId]);
 
   useEffect(() => {
     dispatch(menuChanged({
@@ -119,12 +119,11 @@ const Question = React.memo(() => {
       });
     }
 
-    if (quiz.progressSet.filter(value => String(value) === '0').length < 1) {
-      setIsLast(true);
-    }
+    // 현재 위치 기준 마지막 문제 여부 판단 (progressSet 변경과 무관)
+    setIsLast(quiz.questionSet.indexOf(id) === quiz.questionSet.length - 1);
 
     fetchQuestion();
-  }, [id, dispatch, quiz.progressSet, fetchQuestion]);
+  }, [id, quiz.questionSet, fetchQuestion, dispatch]);
 
   // 기타 함수들도 useCallback으로 최적화
   const getIsLast = useCallback(() => {
@@ -237,10 +236,12 @@ const Question = React.memo(() => {
     };
 
     try {
-      await callApi('post', '/q/move', params);
+      // 먼저 상태를 업데이트하고 라우팅하여 화면을 즉시 다음/이전 문제로 이동
       dispatch(setAnswerSet(answerSet));
       dispatch(setProgressSet(progressSet));
       navigate(`../../q/${quiz.questionSet[targetIndex]}`);
+      // 뒤에서 비동기로 서버에 진행상황 반영 (실패해도 화면 전환은 유지)
+      await callApi('post', '/q/move', params);
     } catch (error) {
       const errorMessage = error.response?.data?.message || '문제 이동 중 오류가 발생했습니다.';
       dispatch(showAlert({

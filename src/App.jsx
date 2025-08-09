@@ -13,6 +13,7 @@ import Main from './components/pages/Main';
 import Question from './components/pages/Question';
 import Register from './components/pages/Register';
 import Review from './components/pages/Review';
+import Admin from './components/pages/Admin';
 import Alert from './components/pages/Alert';
 import Confirm from './components/pages/Confirm';
 import Header from './components/pages/Header';
@@ -51,6 +52,7 @@ function App() {
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="admin" element={<Admin />} />
       </Routes>
       <Alert />
       <Confirm />

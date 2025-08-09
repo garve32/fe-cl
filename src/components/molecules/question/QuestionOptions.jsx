@@ -41,7 +41,7 @@ function QuestionOptions({ type, options, setOptions = () => {}, children }) {
   return (
     <fieldset>
       <legend className="sr-only">Options</legend>
-      <div className="relative z-10 p-4">
+      <div className="relative z-10">
         <div className="space-y-4">
           {options ? getOptions(options) : children}
         </div>

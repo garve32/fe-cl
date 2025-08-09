@@ -108,15 +108,22 @@ export const getFormattedAnswer = entries => {
 };
 
 export const getFormattedQuizInfo = data => {
+  const safeSplit = value => {
+    if (isEmpty(value)) return [];
+    return String(value).split(',');
+  };
+
   return {
-    answerSet: data.answer_set.split(','),
+    answerSet: safeSplit(data.answer_set),
     categoryId: data.category_id,
     categoryNm: data.category_nm,
-    correctSet: data.correct_set.split(','),
+    correctSet: safeSplit(data.correct_set),
+    correctCnt: data.correct_cnt,
     endDt: data.end_dt,
     id: data.id,
-    progressSet: data.progress_set.split(','),
-    questionSet: data.question_set.split(','),
+    progressSet: safeSplit(data.progress_set),
+    questionSet: safeSplit(data.question_set),
+    questionCnt: data.question_cnt,
     seq: data.seq,
     startDt: data.start_dt,
     successCd: data.success_cd,

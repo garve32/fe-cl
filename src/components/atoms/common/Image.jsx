@@ -41,6 +41,8 @@ function Image({ src }) {
             className="max-w-full max-h-80 object-contain mx-auto"
             src={`data:image/png;base64,${src}`}
             alt="문제 이미지"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       ) : null}
@@ -73,6 +75,8 @@ function Image({ src }) {
                 className="w-full h-full object-contain max-w-[85vw] max-h-[85vh]"
                 src={`data:image/png;base64,${src}`}
                 alt="확대된 이미지"
+                loading="eager"
+                decoding="async"
               />
             </div>
             <button

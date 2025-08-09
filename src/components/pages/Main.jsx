@@ -36,7 +36,7 @@ function Main() {
         <MainHeader />
         <div
           id="content-wrapper"
-          className="prose prose-slate relative z-20 mt-8"
+          className="prose prose-slate relative z-20 mt-4"
         >
           <Outlet />
         </div>

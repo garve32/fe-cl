@@ -45,6 +45,19 @@ function Category() {
       });
   }, []);
 
+  const formatMinutes = minutes => {
+    const total = Number(minutes) || 0;
+    const hours = Math.floor(total / 60);
+    const mins = total % 60;
+    if (hours > 0 && mins > 0) {
+      return `${hours}시간 ${mins}분`;
+    }
+    if (hours > 0) {
+      return `${hours}시간`;
+    }
+    return `${mins}분`;
+  };
+
   const handleClick = category => {
     const params = {
       category_id: category.id,
@@ -80,16 +93,16 @@ function Category() {
           {/* 콘텐츠 영역 */}
           <div className="flex-1 mb-3 lg:mb-0 lg:mr-6">
             <h3 className="mb-2 text-sm font-semibold leading-6 text-indigo-600">
-              {`${category.question_cnt}개의 질문 | ${category.time_limit}시간 | 합격하려면 ${category.success_percent}%의 정답을 달성해야함`}
+              {`${category.question_cnt}문항 | ${formatMinutes(category.time_limit)} | 합격 기준: 정답률 ${category.success_percent}% 이상`}
             </h3>
             <p className="mb-1 text-lg font-semibold tracking-tight text-slate-900">
               {category.name}
             </p>
             <div className="mb-3 space-y-1 text-sm leading-6 text-slate-600">
+              <p>{category.description}</p>
               <p>
                 {`준비된 문제 : ${category.pool_cnt} 문항`}
               </p>
-              <p>{category.description}</p>
             </div>
             <button
               className={`group inline-flex h-9 items-center whitespace-nowrap rounded-full px-3 text-sm font-semibold text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 disabled:bg-slate-300 ${

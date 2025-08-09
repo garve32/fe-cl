@@ -1,11 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userLogin } from '../../../features/user/userSlice';
 import CloseButton from '../../atoms/common/buttons/CloseButton';
 
 function HeaderNav({ isOpen, setIsOpen }) {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
 
   const handleLogout = e => {
     e.preventDefault();
@@ -41,17 +42,21 @@ function HeaderNav({ isOpen, setIsOpen }) {
                 New
               </Link>
             </li>
-            <li>
-              <a
-                className="hover:text-sky-500"
-                href="https://quiz-d0xy.onrender.com"
-                onClick={() => {
-                  setIsOpen(false);
-                }}
-              >
-                Admin
-              </a>
-            </li>
+            {user?.adminYn === 'Y' ? (
+              <li>
+                <a
+                  className="hover:text-sky-500"
+                  href="https://quiz-d0xy.onrender.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
+                  Admin
+                </a>
+              </li>
+            ) : null}
             <li>
               <button
                 className="hover:text-sky-500"

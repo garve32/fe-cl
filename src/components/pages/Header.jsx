@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userLogin } from '../../features/user/userSlice';
 import NavButton from '../atoms/common/buttons/NavButton';
@@ -8,6 +8,7 @@ import HeaderNav from '../organisms/header/HeaderNav';
 
 function Header() {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const handleLogout = e => {
@@ -34,30 +35,62 @@ function Header() {
                   <Link to="c">
                     <li className="hover:text-sky-500">New</li>
                   </Link>
-                  <a href="https://quiz-d0xy.onrender.com">
-                    <li className="hover:text-sky-500">Admin</li>
-                  </a>
+                  {user?.adminYn === 'Y' ? (
+                    <a href="https://quiz-d0xy.onrender.com" target="_blank" rel="noreferrer">
+                      <li className="hover:text-sky-500">Admin</li>
+                    </a>
+                  ) : null}
                   <button type="button" onClick={handleLogout}>
                     <li className="hover:text-sky-500">Logout</li>
                   </button>
                 </ul>
               </nav>
-              <div className="ml-6 flex items-center border-l border-slate-200 pl-6">
+              <div className="ml-6 flex items-center border-l border-slate-200 pl-6 space-x-4">
                 <a
-                  href="https://github.com/le-cl/fe-cl"
-                  className="ml-6 block text-slate-400 hover:text-slate-500"
+                  href="https://github.com/garve32"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block text-slate-400 hover:text-slate-500"
                 >
                   <span className="sr-only">quiz on GitHub</span>
                   <GithubIcon />
                 </a>
+                <a
+                  href="https://garve32.tistory.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block text-xs font-medium text-slate-500 hover:text-slate-700"
+                >
+                  Blog
+                </a>
               </div>
             </div>
-            <div className="-my-1 ml-auto flex lg:hidden">
-              <NavButton
-                onClick={() => {
-                  setIsNavOpen(true);
-                }}
-              />
+            {/* 모바일에서도 외부 링크 항상 표시 */}
+            <div className="ml-auto flex items-center space-x-3 lg:hidden">
+              <a
+                href="https://github.com/garve32"
+                target="_blank"
+                rel="noreferrer"
+                className="block text-slate-400 hover:text-slate-500"
+                aria-label="GitHub"
+              >
+                <GithubIcon />
+              </a>
+              <a
+                href="https://garve32.tistory.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="block text-xs font-medium text-slate-500 hover:text-slate-700"
+              >
+                Blog
+              </a>
+              <div className="-my-1">
+                <NavButton
+                  onClick={() => {
+                    setIsNavOpen(true);
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>

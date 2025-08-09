@@ -87,7 +87,7 @@ function Review() {
             const { question, options } = resultDetail;
             return (
               <div
-                className="mb-6 overflow-hidden shadow sm:rounded-md"
+                className="mb-4 overflow-hidden shadow sm:rounded-md"
                 key={question.id}
                 ref={ref => {
                   itemsRef.current = { ...itemsRef.current, [index]: ref };

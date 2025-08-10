@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getApiBaseUrl from '../config';
 // TODO: 백엔드 세션 기반 인증 구현 시 재활성화
 // import store from '../app/store';
 // import { userLogout } from '../features/user/userSlice';
@@ -57,10 +58,7 @@ export const getHyphenated = (a, b) => {
 
 // eslint-disable-next-line default-param-last
 export const callApi = (method, url, params, type = 'json') => {
-  // const baseurl = 'http://13.125.18.81:9002/api/';
-  // const baseurl = 'http://localhost:9002/api/';
-  const baseurl = 'https://quiz-d0xy.onrender.com/api';
-  // const baseurl = 'https://cloudy-limpet-ict-quiz-d29adb3b.koyeb.app/admin/questions';
+  const baseurl = getApiBaseUrl();
 
   const instance = axios.create({
     baseURL: baseurl,

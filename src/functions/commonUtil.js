@@ -1,5 +1,5 @@
 import axios from 'axios';
-import getApiBaseUrl from '../config';
+import { getApiBaseUrl } from '../config';
 // TODO: 백엔드 세션 기반 인증 구현 시 재활성화
 // import store from '../app/store';
 // import { userLogout } from '../features/user/userSlice';

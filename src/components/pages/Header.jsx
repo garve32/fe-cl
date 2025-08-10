@@ -45,7 +45,7 @@ function Header() {
                   </button>
                 </ul>
               </nav>
-              <div className="ml-6 flex items-center border-l border-slate-200 pl-6 space-x-4">
+              <div className="ml-6 flex items-center space-x-4 border-l border-slate-200 pl-6">
                 <a
                   href="https://github.com/garve32"
                   target="_blank"

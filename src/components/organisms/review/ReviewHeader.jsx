@@ -27,7 +27,7 @@ function ReviewHeader({ history }) {
   };
 
   return (
-    <div className="mx-auto max-w-2xl px-3 pt-3 pb-6 sm:px-4 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-6 lg:px-6 lg:pt-6 lg:pb-8">
+    <div className="mx-auto max-w-2xl px-3 pb-6 pt-3 sm:px-4 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-6 lg:px-6 lg:pb-8 lg:pt-6">
       {/* 헤더 영역 - 더 컴팩트하게 */}
       <div className="flex items-center justify-between lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-6">
         <div className="flex items-center space-x-2">
@@ -40,13 +40,13 @@ function ReviewHeader({ history }) {
 
       {/* 차트 영역 - 더 작게 */}
       <div className="mt-3 lg:row-span-3 lg:mt-0">
-        <div className="bg-white rounded-lg border border-gray-200 p-3 shadow-sm">
+        <div className="rounded-lg border border-gray-200 bg-white p-3 shadow-sm">
           <Chart history={history} />
         </div>
       </div>
 
       {/* 상세 정보 영역 - 더 컴팩트하게 */}
-      <div className="py-3 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-2 lg:pb-6 lg:pr-4">
+      <div className="py-3 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-6 lg:pr-4 lg:pt-2">
         <p className="mb-2 text-xs font-semibold leading-5 text-indigo-600 sm:text-sm">
           {getCategoryInfoText(
             history.total_q_cnt,
@@ -67,17 +67,17 @@ function ReviewHeader({ history }) {
               <span className="text-xl font-extrabold text-slate-900 sm:text-2xl">
                 {`${history.correct_per}% `}
               </span>
-              <span className="text-slate-900 text-xs sm:text-sm">
+              <span className="text-xs text-slate-900 sm:text-sm">
                 {`정답 (${history.correct_cnt}/${history.total_q_cnt})`}
               </span>
             </li>
             <li className="text-slate-700">
-              <span className="text-slate-900 text-xs sm:text-sm">
+              <span className="text-xs text-slate-900 sm:text-sm">
                 {getFormattedProgressTimeText(history.accum_sec)}
               </span>
             </li>
             <li className="text-slate-700">
-              <span className="text-slate-900 text-xs sm:text-sm">
+              <span className="text-xs text-slate-900 sm:text-sm">
                 {formatEndDate(history.start_dt)} ~ {formatEndDate(history.end_dt)}
               </span>
             </li>

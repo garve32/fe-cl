@@ -3,7 +3,7 @@ import { getOptionColor } from '../../../../functions/commonUtil';
 
 function CheckIcon({ checked, correct }) {
   return (
-    <svg className="h-5 w-5 flex-none" fill="none">
+    <svg className="size-5 flex-none" fill="none">
       <path
         fillRule="evenodd"
         clipRule="evenodd"

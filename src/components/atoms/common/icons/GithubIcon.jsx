@@ -4,7 +4,7 @@ function GithubIcon() {
   return (
     <svg
       viewBox="0 0 16 16"
-      className="h-5 w-5"
+      className="size-5"
       fill="currentColor"
       aria-hidden="true"
     >

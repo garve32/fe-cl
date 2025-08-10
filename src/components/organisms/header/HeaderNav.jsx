@@ -24,7 +24,7 @@ function HeaderNav({ isOpen, setIsOpen }) {
         className="fixed inset-0 h-screen bg-black/20 backdrop-blur-sm dark:bg-slate-900/80"
         aria-hidden="true"
       >
-        <div className="fixed top-4 right-4 w-full max-w-[10rem] rounded-lg bg-white p-6 text-base font-semibold text-slate-900 shadow-lg lg:hidden">
+        <div className="fixed right-4 top-4 w-full max-w-40 rounded-lg bg-white p-6 text-base font-semibold text-slate-900 shadow-lg lg:hidden">
           <CloseButton
             onClick={() => {
               setIsOpen(false);

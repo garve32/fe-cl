@@ -33,6 +33,7 @@ const Question = React.memo(() => {
   const [options, setOptions] = useState([]);
   const [isLast, setIsLast] = useState(false);
   const formRef = useRef();
+  const isEndingRef = useRef(false); // endQuestion 호출 중인지 추적
 
   // useMemo로 계산 최적화
   const getCheckedOptions = useMemo(() => {
@@ -122,8 +123,11 @@ const Question = React.memo(() => {
     // 현재 위치 기준 마지막 문제 여부 판단 (progressSet 변경과 무관)
     setIsLast(quiz.questionSet.indexOf(id) === quiz.questionSet.length - 1);
 
-    fetchQuestion();
-  }, [id, quiz.questionSet, fetchQuestion, dispatch]);
+    // endQuestion 호출 중이 아니고, 문제가 유효하고 퀴즈가 진행 중일 때만 fetchQuestion 호출
+    if (!isEndingRef.current && isValidQuestionId && !isEmpty(quiz.id)) {
+      fetchQuestion();
+    }
+  }, [id, quiz.questionSet, dispatch, isValidQuestionId, quiz.id]);
 
   // 기타 함수들도 useCallback으로 최적화
   const getIsLast = useCallback(() => {
@@ -134,6 +138,9 @@ const Question = React.memo(() => {
   }, [isLast, quiz.questionSet, id]);
 
   const endQuestion = useCallback(async (target, currentIndex) => {
+    // endQuestion 호출 중임을 표시
+    isEndingRef.current = true;
+    
     const formData = new FormData(target);
     const answerSet = [...quiz.answerSet];
     const progressSet = [...quiz.progressSet];
@@ -151,6 +158,7 @@ const Question = React.memo(() => {
     // 미완료 검증
     for (let i = 0; i < progressSet.length; i += 1) {
       if (String(progressSet[i]) === '0') {
+        isEndingRef.current = false; // 검증 실패 시 플래그 리셋
         dispatch(showAlert({
           isShow: true,
           title: '알림',
@@ -190,8 +198,11 @@ const Question = React.memo(() => {
         accumSec: response.data.accum_sec,
       };
       dispatch(initQuiz(payload));
+      
+      // navigate 호출하여 리뷰 페이지로 이동
       navigate(`../../r/${quiz.id}`);
     } catch (error) {
+      isEndingRef.current = false; // 에러 발생 시 플래그 리셋
       const errorMessage = error.response?.data?.message || '문제 제출 중 오류가 발생했습니다.';
       dispatch(showAlert({
         isShow: true,

@@ -16,14 +16,14 @@ function Modal({ type, info, handleConfirm, handleCancel }) {
       role="dialog"
       aria-modal="true"
     >
-      <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+      <div className="fixed inset-0 bg-gray-500/75 transition-opacity" />
       <div className="fixed inset-0 z-50 overflow-y-auto">
         <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
           <div className="relative w-full overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:max-w-lg">
-            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">
                 <div
-                  className={`mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-${color}-100 sm:mx-0 sm:h-10 sm:w-10`}
+                  className={`mx-auto flex shrink-0 items-center justify-center rounded-full size-12 bg-${color}-100 sm:mx-0 sm:size-10`}
                 >
                   {type === 'alert' ? (
                     <ExclamationIcon color={color} />

@@ -9,7 +9,7 @@ function QuestionProgressBar({ progressPercent }) {
           width: `${progressPercent}%`,
         }}
       />
-      <div className="-my-[0.3125rem] ml-0.5 h-[1.125rem] w-1 rounded-full bg-indigo-600" />
+      <div className="ml-0.5 h-[1.125rem] w-1 -my-[0.3125rem] rounded-full bg-indigo-600" />
     </div>
   );
 }

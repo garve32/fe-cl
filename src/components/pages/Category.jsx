@@ -88,10 +88,10 @@ function Category() {
       {categories.map(category => (
         <div
           key={category.id}
-          className="flex flex-col bg-slate-50 rounded-xl p-4 sm:p-5 lg:flex-row lg:items-center"
+          className="flex flex-col rounded-xl bg-slate-50 p-4 sm:p-5 lg:flex-row lg:items-center"
         >
           {/* 콘텐츠 영역 */}
-          <div className="flex-1 mb-3 lg:mb-0 lg:mr-6">
+          <div className="mb-3 flex-1 lg:mb-0 lg:mr-6">
             <h3 className="mb-2 text-sm font-semibold leading-6 text-indigo-600">
               {`${category.question_cnt}문항 | ${formatMinutes(category.time_limit)} | 합격 기준: 정답률 ${category.success_percent}% 이상`}
             </h3>
@@ -130,16 +130,16 @@ function Category() {
           </div>
 
           {/* 이미지 영역 */}
-          <div className="flex-shrink-0 w-full lg:w-48 xl:w-56">
-            <div className="relative h-40 lg:h-36 xl:h-40 overflow-hidden rounded-lg bg-slate-100 shadow-lg">
+          <div className="w-full shrink-0 lg:w-48 xl:w-56">
+            <div className="relative h-40 overflow-hidden rounded-lg bg-slate-100 shadow-lg lg:h-36 xl:h-40">
               <img 
-                className="w-full h-full object-contain p-2" 
+                className="size-full object-contain p-2" 
                 src={category.logo_url} 
                 alt={category.name}
               />
               {category.active_yn === 'N' && (
-                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center rounded-lg">
-                  <span className="text-white text-sm font-medium">준비중</span>
+                <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/30">
+                  <span className="text-sm font-medium text-white">준비중</span>
                 </div>
               )}
             </div>

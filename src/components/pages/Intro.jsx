@@ -100,9 +100,9 @@ function Intro() {
               <div className="group relative py-2 sm:rounded-2xl">
                 <div className="absolute -inset-x-4 -inset-y-px bg-gray-50 opacity-0 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl lg:-inset-x-8" />
                 <div className="relative flex items-center">
-                  <div className="relative h-[3.125rem] w-[3.125rem] flex-none overflow-hidden rounded-lg sm:h-[3.75rem] sm:w-[3.75rem]">
+                  <div className="relative size-[3.125rem] flex-none overflow-hidden rounded-lg sm:size-[3.75rem]">
                     <img
-                      className="absolute inset-0 h-full w-full object-cover blur-0 [image-rendering:auto]"
+                      className="absolute inset-0 size-full object-cover blur-0 [image-rendering:auto]"
                       width={50}
                       height={50}
                       sizes="(min-width: 640px) 60px, 50px"

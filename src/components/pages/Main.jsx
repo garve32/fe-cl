@@ -29,7 +29,7 @@ function Main() {
       <div
         className={`mx-auto max-w-3xl pt-10${
           isProcessing || isReviewing
-            ? ' xl:mr-[15.5rem] xl:ml-0 xl:max-w-none xl:pr-16'
+            ? ' xl:ml-0 xl:mr-[15.5rem] xl:max-w-none xl:pr-16'
             : ''
         }`}
       >

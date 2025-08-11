@@ -21,8 +21,10 @@ import modalReducer from '../features/modal/modalSlice';
 
 const persistConfig = {
   key: 'root',
-  version: 1,
+  version: 3,
   storage,
+  // 세션 간 유지가 필요한 슬라이스만 영속화합니다
+  whitelist: ['user'],
 };
 
 const rootReducer = combineReducers({

@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { userLogin } from '../../features/user/userSlice';
 import { showAlert } from '../../features/modal/modalSlice';
-import sessionManager from '../../utils/sessionManager';
 
 import { callApi, isEmpty } from '../../functions/commonUtil';
 import Button from '../atoms/common/buttons/LoginButton';
@@ -60,7 +59,6 @@ function Login() {
     callApi('post', '/u/login', params)
       .then(response => {
         dispatch(userLogin(response.data));
-        sessionManager.startSession(); // 세션 시작
         navigate('/');
       })
       .catch(error => {

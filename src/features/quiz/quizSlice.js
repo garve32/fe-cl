@@ -45,6 +45,20 @@ const quizSlice = createSlice({
     setAccumSec(state, action) {
       state.accumSec = action.payload;
     },
+    resetQuiz(state) {
+      state.answerSet = null;
+      state.categoryId = null;
+      state.correctSet = null;
+      state.endDt = null;
+      state.id = null;
+      state.progressSet = null;
+      state.questionSet = null;
+      state.seq = null;
+      state.startDt = null;
+      state.successCd = null;
+      state.userId = null;
+      state.accumSec = 0;
+    },
   },
 });
 
@@ -54,5 +68,6 @@ export const {
   setCorrectSet,
   setProgressSet,
   setAccumSec,
+  resetQuiz,
 } = quizSlice.actions;
 export default quizSlice.reducer;

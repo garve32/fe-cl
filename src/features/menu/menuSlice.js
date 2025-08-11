@@ -20,8 +20,13 @@ const menuSlice = createSlice({
       //   completed: false,
       // });
     },
+    resetMenu(state) {
+      state.id = 'Intro';
+      state.name = '시작하기';
+      state.description = '새 테스트 또는 진행하던 테스트를 이어서 시작할 수 있습니다.';
+    },
   },
 });
 
-export const { menuChanged } = menuSlice.actions;
+export const { menuChanged, resetMenu } = menuSlice.actions;
 export default menuSlice.reducer;

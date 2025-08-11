@@ -11,6 +11,7 @@ import Divider from '../atoms/common/Divider';
 import QuestionContent from '../molecules/question/QuestionContent';
 import QuestionOptions from '../molecules/question/QuestionOptions';
 import ReviewHeader from '../organisms/review/ReviewHeader';
+import ScrollTopButton from '../atoms/common/buttons/ScrollTopButton';
 
 function Review() {
   const dispatch = useDispatch();
@@ -112,6 +113,7 @@ function Review() {
             );
           })
         : null}
+      <ScrollTopButton />
     </>
   );
 }

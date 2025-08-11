@@ -35,8 +35,23 @@ const historySlice = createSlice({
       state.totalQCnt = action.payload.total_q_cnt;
       state.wrongCnt = action.payload.wrong_cnt;
     },
+    resetHistory(state) {
+      state.categoryId = null;
+      state.categoryNm = null;
+      state.correctCnt = null;
+      state.correctPer = null;
+      state.endDt = null;
+      state.id = null;
+      state.resultDetails = [];
+      state.startDt = null;
+      state.successCd = null;
+      state.successCdNm = null;
+      state.successPer = null;
+      state.totalQCnt = null;
+      state.wrongCnt = null;
+    },
   },
 });
 
-export const { initHistory } = historySlice.actions;
+export const { initHistory, resetHistory } = historySlice.actions;
 export default historySlice.reducer;

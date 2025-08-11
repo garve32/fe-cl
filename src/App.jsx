@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Analytics } from '@vercel/analytics/react';
 
 import { cancelAlert, cancelConfirm } from './features/modal/modalSlice';
-import sessionManager from './utils/sessionManager';
 
 import Category from './components/pages/Category';
 import Intro from './components/pages/Intro';
@@ -26,11 +25,6 @@ function App() {
   useEffect(() => {
     dispatch(cancelAlert());
     dispatch(cancelConfirm());
-    
-    // 세션 매니저 초기화
-    if (user.id) {
-      sessionManager.startSession();
-    }
   }, [user.id]);
 
   return (

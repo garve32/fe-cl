@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userLogin } from '../../features/user/userSlice';
+import { getAdminUrl } from '../../config';
 import NavButton from '../atoms/common/buttons/NavButton';
 import GithubIcon from '../atoms/common/icons/GithubIcon';
 import HeaderNav from '../organisms/header/HeaderNav';
@@ -36,7 +37,7 @@ function Header() {
                     <li className="hover:text-sky-500">New</li>
                   </Link>
                   {user?.adminYn === 'Y' ? (
-                    <a href="https://quiz-d0xy.onrender.com" target="_blank" rel="noreferrer">
+                    <a href={getAdminUrl()} target="_blank" rel="noreferrer">
                       <li className="hover:text-sky-500">Admin</li>
                     </a>
                   ) : null}

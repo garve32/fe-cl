@@ -10,6 +10,10 @@
    Name: REACT_APP_API_BASE_URL
    Value: https://your-backend-api.vercel.app/api
    Environment: Production (또는 모든 환경)
+   
+   Name: REACT_APP_ADMIN_URL
+   Value: https://your-admin-panel.vercel.app
+   Environment: Production (또는 모든 환경)
    ```
 
 ### Render
@@ -19,6 +23,9 @@
    ```
    Key: REACT_APP_API_BASE_URL
    Value: https://your-backend-api.render.com/api
+   
+   Key: REACT_APP_ADMIN_URL
+   Value: https://your-admin-panel.render.com
    ```
 
 ### Netlify
@@ -28,6 +35,9 @@
    ```
    Key: REACT_APP_API_BASE_URL
    Value: https://your-backend-api.netlify.app/api
+   
+   Key: REACT_APP_ADMIN_URL
+   Value: https://your-admin-panel.netlify.app
    ```
 
 ## 로컬 개발 환경
@@ -44,12 +54,20 @@
 4. `.env`
 5. 코드 내 기본값
 
-## 확인 방법
+### 확인 방법
 
 ### 개발 중 확인
 ```javascript
 import { getEnvironment } from './src/config';
 console.log(getEnvironment());
+// 출력 예시:
+// {
+//   nodeEnv: "development",
+//   apiBaseUrl: "http://localhost:9002/api",
+//   adminUrl: "http://localhost:9002",
+//   isProduction: false,
+//   isDevelopment: true
+// }
 ```
 
 ### 빌드된 앱에서 확인

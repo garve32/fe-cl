@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userLogin } from '../../../features/user/userSlice';
+import { getAdminUrl } from '../../../config';
 import CloseButton from '../../atoms/common/buttons/CloseButton';
 
 function HeaderNav({ isOpen, setIsOpen }) {
@@ -46,7 +47,7 @@ function HeaderNav({ isOpen, setIsOpen }) {
               <li>
                 <a
                   className="hover:text-sky-500"
-                  href="https://quiz-d0xy.onrender.com"
+                  href={getAdminUrl()}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => {

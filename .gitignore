@@ -16,6 +16,8 @@
 
 # misc
 .DS_Store
+
+# environment variables (keep .env for default values)
 .env.local
 .env.development.local
 .env.test.local

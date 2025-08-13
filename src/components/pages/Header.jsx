@@ -47,7 +47,7 @@ function Header() {
                 </ul>
               </nav>
               <div className="ml-6 flex items-center space-x-4 border-l border-slate-200 pl-6">
-                <a
+                {/* <a
                   href="https://github.com/garve32"
                   target="_blank"
                   rel="noreferrer"
@@ -55,7 +55,7 @@ function Header() {
                 >
                   <span className="sr-only">quiz on GitHub</span>
                   <GithubIcon />
-                </a>
+                </a> */}
                 <a
                   href="https://garve32.tistory.com/"
                   target="_blank"
@@ -68,7 +68,7 @@ function Header() {
             </div>
             {/* 모바일에서도 외부 링크 항상 표시 */}
             <div className="ml-auto flex items-center space-x-3 lg:hidden">
-              <a
+              {/* <a
                 href="https://github.com/garve32"
                 target="_blank"
                 rel="noreferrer"
@@ -76,7 +76,7 @@ function Header() {
                 aria-label="GitHub"
               >
                 <GithubIcon />
-              </a>
+              </a> */}
               <a
                 href="https://garve32.tistory.com/"
                 target="_blank"

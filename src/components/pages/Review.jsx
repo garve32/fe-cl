@@ -20,6 +20,7 @@ function Review() {
     resultDetails: [],
   });
   const [isResponsed, setIsResponsed] = useState(false);
+  const [filter, setFilter] = useState('all'); // 'all', 'correct', 'incorrect'
   const itemsRef = useRef([]);
 
   const getFormattedOptions = options => {
@@ -31,6 +32,22 @@ function Review() {
       };
     });
   };
+
+  // 필터링된 결과 계산
+  const getFilteredResults = () => {
+    if (!history.resultDetails) return [];
+    
+    switch (filter) {
+      case 'correct':
+        return history.resultDetails.filter(detail => detail.question.correct_yn === 'Y');
+      case 'incorrect':
+        return history.resultDetails.filter(detail => detail.question.correct_yn === 'N');
+      default:
+        return history.resultDetails;
+    }
+  };
+
+  const filteredResults = getFilteredResults();
 
   useEffect(() => {
     dispatch(
@@ -83,8 +100,51 @@ function Review() {
       {isResponsed ? (
         <ReviewHeader history={{ ...history, resultDetail: [] }} />
       ) : null}
+      
+      {/* 필터 토글 버튼 */}
+      {isResponsed && (
+        <div className="mx-auto max-w-2xl px-3 pb-4 sm:px-4 lg:max-w-7xl lg:px-6">
+          <div className="flex justify-center space-x-1 rounded-lg bg-gray-100 p-1">
+            <button
+              type="button"
+              onClick={() => setFilter('all')}
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                filter === 'all'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              전체 ({history.total_q_cnt})
+            </button>
+            <button
+              type="button"
+              onClick={() => setFilter('correct')}
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                filter === 'correct'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              정답 ({history.correct_cnt})
+            </button>
+            <button
+              type="button"
+              onClick={() => setFilter('incorrect')}
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                filter === 'incorrect'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              오답 ({history.total_q_cnt - history.correct_cnt})
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* 필터링된 문제 목록 */}
       {isResponsed
-        ? history.resultDetails.map((resultDetail, index) => {
+        ? filteredResults.map((resultDetail, index) => {
             const { question, options } = resultDetail;
             return (
               <div

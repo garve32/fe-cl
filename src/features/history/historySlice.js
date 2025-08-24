@@ -18,6 +18,9 @@ const historySlice = createSlice({
     successPer: null,
     totalQCnt: null,
     wrongCnt: null,
+    timeLimit: null,
+    accumSec: null,
+    filter: 'all', // 추가: 필터 상태
   },
   reducers: {
     initHistory(state, action) {
@@ -34,6 +37,8 @@ const historySlice = createSlice({
       state.successPer = action.payload.success_per;
       state.totalQCnt = action.payload.total_q_cnt;
       state.wrongCnt = action.payload.wrong_cnt;
+      state.timeLimit = action.payload.time_limit;
+      state.accumSec = action.payload.accum_sec;
     },
     resetHistory(state) {
       state.categoryId = null;
@@ -49,9 +54,15 @@ const historySlice = createSlice({
       state.successPer = null;
       state.totalQCnt = null;
       state.wrongCnt = null;
+      state.timeLimit = null;
+      state.accumSec = null;
+      state.filter = 'all'; // 필터도 초기화
+    },
+    setHistoryFilter(state, action) {
+      state.filter = action.payload;
     },
   },
 });
 
-export const { initHistory, resetHistory } = historySlice.actions;
+export const { initHistory, resetHistory, setHistoryFilter } = historySlice.actions;
 export default historySlice.reducer;

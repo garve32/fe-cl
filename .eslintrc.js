@@ -25,5 +25,13 @@ module.exports = {
     'no-console': 'off',
     'no-alert': 'off',
     'import/no-unresolved': 'off',
+    // Redux Toolkit uses Immer, so param reassignment is safe in reducers
+    'no-param-reassign': ['error', { 
+      props: true, 
+      ignorePropertyModificationsFor: ['state', 'draft'] 
+    }],
+    // Import/export rules for better compatibility
+    'import/no-named-as-default': 'off',
+    'import/no-named-as-default-member': 'off',
   },
 };

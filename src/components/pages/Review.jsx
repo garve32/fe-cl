@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { initHistory } from '../../features/history/historySlice';
+import { initHistory, setHistoryFilter } from '../../features/history/historySlice';
 
 import { menuChanged } from '../../features/menu/menuSlice';
 import { showAlert } from '../../features/modal/modalSlice';
@@ -16,11 +16,9 @@ import ScrollTopButton from '../atoms/common/buttons/ScrollTopButton';
 function Review() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [history, setHistory] = useState({
-    resultDetails: [],
-  });
+  const history = useSelector(state => state.history);
+  const filter = useSelector(state => state.history.filter);
   const [isResponsed, setIsResponsed] = useState(false);
-  const [filter, setFilter] = useState('all'); // 'all', 'correct', 'incorrect'
   const itemsRef = useRef([]);
 
   const getFormattedOptions = options => {
@@ -80,7 +78,6 @@ function Review() {
         };
         setIsResponsed(true);
         dispatch(initHistory(payload));
-        setHistory(payload);
       })
       .catch(error => {
         const errorMessage = error.response?.data?.message || '리뷰 데이터를 불러오는 중 오류가 발생했습니다.';
@@ -98,7 +95,7 @@ function Review() {
   return (
     <>
       {isResponsed ? (
-        <ReviewHeader history={{ ...history, resultDetail: [] }} />
+        <ReviewHeader history={history} />
       ) : null}
       
       {/* 필터 토글 버튼 */}
@@ -107,36 +104,36 @@ function Review() {
           <div className="flex justify-center space-x-1 rounded-lg bg-gray-100 p-1">
             <button
               type="button"
-              onClick={() => setFilter('all')}
+              onClick={() => dispatch(setHistoryFilter('all'))}
               className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
                 filter === 'all'
                   ? 'bg-white text-gray-900 shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
-              전체 ({history.total_q_cnt})
+              전체 ({history.totalQCnt})
             </button>
             <button
               type="button"
-              onClick={() => setFilter('correct')}
+              onClick={() => dispatch(setHistoryFilter('correct'))}
               className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
                 filter === 'correct'
                   ? 'bg-white text-gray-900 shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
-              정답 ({history.correct_cnt})
+              정답 ({history.correctCnt})
             </button>
             <button
               type="button"
-              onClick={() => setFilter('incorrect')}
+              onClick={() => dispatch(setHistoryFilter('incorrect'))}
               className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
                 filter === 'incorrect'
                   ? 'bg-white text-gray-900 shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
-              오답 ({history.total_q_cnt - history.correct_cnt})
+              오답 ({history.totalQCnt - history.correctCnt})
             </button>
           </div>
         </div>
@@ -150,6 +147,7 @@ function Review() {
               <div
                 className="mb-4 overflow-hidden shadow sm:rounded-md"
                 key={question.id}
+                data-question-id={question.id}
                 ref={ref => {
                   itemsRef.current = { ...itemsRef.current, [index]: ref };
                 }}

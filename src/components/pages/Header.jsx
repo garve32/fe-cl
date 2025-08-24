@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userLogin } from '../../features/user/userSlice';
+import { openStatsModal } from '../../features/stats/statsSlice';
 import { getAdminUrl } from '../../config';
 import NavButton from '../atoms/common/buttons/NavButton';
 // import GithubIcon from '../atoms/common/icons/GithubIcon';
 import HeaderNav from '../organisms/header/HeaderNav';
+import CategoryStatsModal from '../organisms/stats/CategoryStatsModal';
 
 function Header() {
   const dispatch = useDispatch();
@@ -15,6 +17,10 @@ function Header() {
   const handleLogout = e => {
     e.preventDefault();
     dispatch(userLogin({}));
+  };
+
+  const handleOpenStats = () => {
+    dispatch(openStatsModal());
   };
 
   return (
@@ -36,6 +42,9 @@ function Header() {
                   <Link to="c">
                     <li className="hover:text-sky-500">New</li>
                   </Link>
+                  <button type="button" onClick={handleOpenStats}>
+                    <li className="hover:text-sky-500">Stats</li>
+                  </button>
                   {user?.adminYn === 'Y' ? (
                     <a href={getAdminUrl()} target="_blank" rel="noreferrer">
                       <li className="hover:text-sky-500">Admin</li>
@@ -97,6 +106,7 @@ function Header() {
         </div>
       </div>
       <HeaderNav isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
+      <CategoryStatsModal />
     </div>
   );
 }

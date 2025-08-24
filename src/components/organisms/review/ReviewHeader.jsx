@@ -32,10 +32,10 @@ function ReviewHeader({ history }) {
       <div className="flex items-center justify-between lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-6">
         <div className="flex items-center space-x-2">
           <h3 className="text-base font-semibold leading-6 text-gray-900 sm:text-lg">
-            {`${history.category_nm} 결과`}
+            {`${history.categoryNm} 결과`}
           </h3>
         </div>
-        <Status value={history.success_cd} />
+        <Status value={history.successCd} />
       </div>
 
       {/* 차트 영역 - 더 작게 */}
@@ -49,36 +49,36 @@ function ReviewHeader({ history }) {
       <div className="py-3 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-6 lg:pr-4 lg:pt-2">
         <p className="mb-2 text-xs font-semibold leading-5 text-indigo-600 sm:text-sm">
           {getCategoryInfoText(
-            history.total_q_cnt,
-            history.time_limit,
-            history.success_per,
+            history.totalQCnt,
+            history.timeLimit,
+            history.successPer,
           )}
         </p>
         <div className="mt-6 sm:mt-8">
           <ul className="list-disc space-y-1.5 pl-3 text-sm sm:space-y-2 sm:pl-4 sm:text-base">
-            {/* {String(history.success_cd) === 'F' ? (
+            {/* {String(history.successCd) === 'F' ? (
               <li className="text-rose-600">
                 <span className="text-xs sm:text-sm">
-                  {`합격하려면 ${history.success_per}%를 달성해야 함`}
+                  {`합격하려면 ${history.successPer}%를 달성해야 함`}
                 </span>
               </li>
             ) : null} */}
             <li className="text-slate-700">
               <span className="text-xl font-extrabold text-slate-900 sm:text-2xl">
-                {`${history.correct_per}% `}
+                {`${history.correctPer}% `}
               </span>
               <span className="text-xs text-slate-900 sm:text-sm">
-                {`정답 (${history.correct_cnt}/${history.total_q_cnt})`}
-              </span>
-            </li>
-            <li className="text-slate-700">
-              <span className="text-xs text-slate-900 sm:text-sm">
-                {getFormattedProgressTimeText(history.accum_sec)}
+                {`정답 (${history.correctCnt}/${history.totalQCnt})`}
               </span>
             </li>
             <li className="text-slate-700">
               <span className="text-xs text-slate-900 sm:text-sm">
-                {formatEndDate(history.start_dt)} ~ {formatEndDate(history.end_dt)}
+                {getFormattedProgressTimeText(history.accumSec)}
+              </span>
+            </li>
+            <li className="text-slate-700">
+              <span className="text-xs text-slate-900 sm:text-sm">
+                {formatEndDate(history.startDt)} ~ {formatEndDate(history.endDt)}
               </span>
             </li>
           </ul>

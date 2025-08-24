@@ -18,6 +18,7 @@ import menuReducer from '../features/menu/menuSlice';
 import quizReducer from '../features/quiz/quizSlice';
 import historyReducer from '../features/history/historySlice';
 import modalReducer from '../features/modal/modalSlice';
+import statsReducer from '../features/stats/statsSlice';
 
 const persistConfig = {
   key: 'root',
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   quiz: quizReducer,
   history: historyReducer,
   modal: modalReducer,
+  stats: statsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

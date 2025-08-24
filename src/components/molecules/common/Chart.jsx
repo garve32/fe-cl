@@ -9,8 +9,8 @@ function Chart({ history }) {
     labels: ['정답', '오답'],
     datasets: [
       {
-        label: history.category_nm,
-        data: [Number(history.correct_cnt), Number(history.wrong_cnt)],
+        label: history.categoryNm,
+        data: [Number(history.correctCnt), Number(history.wrongCnt)],
         backgroundColor: ['rgb(79 70 229)', 'rgb(225 29 72)'],
         color: ['rgb(79 70 229)', 'rgb(225 29 72)'],
         borderWidth: 1,
@@ -47,7 +47,7 @@ function Chart({ history }) {
           label(context) {
             const label = context.label || '';
             const value = context.parsed;
-            const total = Number(history.correct_cnt) + Number(history.wrong_cnt);
+            const total = Number(history.correctCnt) + Number(history.wrongCnt);
             const percentage = ((value / total) * 100).toFixed(1);
             return `${label}: ${value}개 (${percentage}%)`;
           }

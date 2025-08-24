@@ -273,3 +273,32 @@ export const getCategoryInfoText = (
     timeLimit * 60,
   )}  |  합격하려면 ${successPercent}%의 정답을 달성해야함`;
 };
+
+// 카테고리 통계 데이터 포맷팅 함수
+export const getFormattedCategoryStats = (data) => {
+  return {
+    categoryId: data.category_id,
+    categoryNm: data.category_nm,
+    logoUrl: data.logo_url,
+    totalQuestions: data.total_questions,
+    overallCorrectRate: Math.round(data.overall_correct_rate || 0),
+    attemptStats: {
+      5: { count: data.attempt_5_count || 0, correctRate: Math.round(data.attempt_5_correct_rate || 0) },
+      4: { count: data.attempt_4_count || 0, correctRate: Math.round(data.attempt_4_correct_rate || 0) },
+      3: { count: data.attempt_3_count || 0, correctRate: Math.round(data.attempt_3_correct_rate || 0) },
+      2: { count: data.attempt_2_count || 0, correctRate: Math.round(data.attempt_2_correct_rate || 0) },
+      1: { count: data.attempt_1_count || 0, correctRate: Math.round(data.attempt_1_correct_rate || 0) },
+    },
+    unattempted: data.unattempted_count || 0,
+  };
+};
+
+// 전체 통계 데이터 포맷팅 함수
+export const getFormattedOverallStats = (data) => {
+  return {
+    totalCategories: data.total_categories || 0,
+    totalQuestions: data.total_questions || 0,
+    attemptedQuestions: data.attempted_questions || 0,
+    overallCorrectRate: Math.round(data.overall_correct_rate || 0),
+  };
+};

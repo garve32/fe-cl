@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userLogin } from '../../../features/user/userSlice';
-import { openStatsModal } from '../../../features/stats/statsSlice';
 import { getAdminUrl } from '../../../config';
 import CloseButton from '../../atoms/common/buttons/CloseButton';
 
@@ -14,11 +13,6 @@ function HeaderNav({ isOpen, setIsOpen }) {
     e.preventDefault();
     setIsOpen(false);
     dispatch(userLogin({}));
-  };
-
-  const handleOpenStats = () => {
-    setIsOpen(false);
-    dispatch(openStatsModal());
   };
 
   return isOpen ? (
@@ -48,15 +42,6 @@ function HeaderNav({ isOpen, setIsOpen }) {
               >
                 New
               </Link>
-            </li>
-            <li>
-              <button
-                className="hover:text-sky-500"
-                type="button"
-                onClick={handleOpenStats}
-              >
-                Stats
-              </button>
             </li>
             {user?.adminYn === 'Y' ? (
               <li>

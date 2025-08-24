@@ -86,6 +86,13 @@ function Header() {
               >
                 <GithubIcon />
               </a> */}
+              <nav className="text-sm font-semibold leading-6 text-slate-700">
+                <ul className="flex space-x-8">
+                  <button type="button" onClick={handleOpenStats}>
+                    <li className="hover:text-sky-500">Stats</li>
+                  </button>
+                </ul>
+              </nav>
               <a
                 href="https://garve32.tistory.com/"
                 target="_blank"

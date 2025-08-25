@@ -130,7 +130,17 @@ function CategoryStatsModal() {
     const notAttempts = categoryStats.filter(item => item.select_count === 0).reduce((sum, item) => sum + item.attempt_count, 0);
 
     // 도전 패턴 분석
-    const maxAttempts = Math.max(...categoryStats.map(item => item.select_count));
+    const selectedCategory = availableCategories.find(cat => cat.id === selectedCategoryId);
+    const maxAttempts = selectedCategory ? selectedCategory.attempt_count : 0;
+    console.log(selectedCategory);
+    console.log(selectedCategoryId);
+    console.log(maxAttempts);
+
+    // const maxAttempts = (() => {
+    //   const selectedCategory = availableCategories.find(cat => cat.id === selectedCategoryId);
+    //   return selectedCategory?.attempt_count || 0;
+    // })();
+    // const maxAttempts = Math.max(...categoryStats.map(item => item.select_count));
     const avgCorrectRate = categoryStats.reduce((sum, item) => sum + (item.correct_rate * item.attempt_count), 0) / totalQuestions;
 
     return {

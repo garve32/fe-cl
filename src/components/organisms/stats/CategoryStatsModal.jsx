@@ -151,34 +151,34 @@ function CategoryStatsModal() {
     if (correctRate >= 90) return {
       bg: 'bg-emerald-500',
       bgLight: 'bg-emerald-50',
-      text: 'text-emerald-700',
+      text: 'text-emerald-900',
       ring: 'ring-emerald-200',
     };
     if (correctRate >= 80) return {
       bg: 'bg-green-500',
       bgLight: 'bg-green-50',
-      text: 'text-green-700',
+      text: 'text-green-900',
       ring: 'ring-green-200',
     };
     if (correctRate >= 70) return {
       bg: 'bg-blue-500',
       bgLight: 'bg-blue-50',
-      text: 'text-blue-700',
+      text: 'text-blue-900',
       ring: 'ring-blue-200',
     };
     if (correctRate >= 60) return {
       bg: 'bg-yellow-500',
       bgLight: 'bg-yellow-50',
-      text: 'text-yellow-700',
+      text: 'text-yellow-900',
       ring: 'ring-yellow-200',
     };
     if (correctRate >= 40) return {
       bg: 'bg-orange-500',
       bgLight: 'bg-orange-50',
-      text: 'text-orange-700',
+      text: 'text-orange-900',
       ring: 'ring-orange-200',
     };
-    return { bg: 'bg-red-500', bgLight: 'bg-red-50', text: 'text-red-700', ring: 'ring-red-200' };
+    return { bg: 'bg-red-500', bgLight: 'bg-red-50', text: 'text-red-900', ring: 'ring-red-200' };
   };
 
   // 로딩 상태
@@ -285,7 +285,7 @@ function CategoryStatsModal() {
   const renderChartView = () => {
     if (!stats || stats.sortedData.length === 0) return null;
 
-    const maxQuestionCount = Math.max(...stats.sortedData.map(item => item.attempt_count));
+    // const maxQuestionCount = Math.max(...stats.sortedData.map(item => item.attempt_count));
 
     return (
       <div className="p-4">
@@ -295,7 +295,8 @@ function CategoryStatsModal() {
           <div className="space-y-2">
             {stats.sortedData.map((item) => {
               const colors = getColorsByCorrectRate(item.correct_rate);
-              const barWidth = (item.attempt_count / maxQuestionCount) * 100;
+              // const barWidth_o = (item.attempt_count / maxQuestionCount) * 100;
+              const barWidth = item.correct_rate;
 
               return (
                 <div key={`${item.select_count}-${item.attempt_count}`} className="flex items-center gap-2">

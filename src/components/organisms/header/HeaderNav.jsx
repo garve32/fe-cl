@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { userLogin } from '../../../features/user/userSlice';
 import { getAdminUrl } from '../../../config';
 import CloseButton from '../../atoms/common/buttons/CloseButton';
@@ -32,17 +31,6 @@ function HeaderNav({ isOpen, setIsOpen }) {
             }}
           />
           <ul className="space-y-6">
-            <li>
-              <Link
-                className="hover:text-sky-500"
-                to="c"
-                onClick={() => {
-                  setIsOpen(false);
-                }}
-              >
-                New
-              </Link>
-            </li>
             {user?.adminYn === 'Y' ? (
               <li>
                 <a

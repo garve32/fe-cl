@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { ChartBarIcon } from '@heroicons/react/outline';
 import { userLogin } from '../../features/user/userSlice';
 import { openStatsModal } from '../../features/stats/statsSlice';
 import { getAdminUrl } from '../../config';
 import NavButton from '../atoms/common/buttons/NavButton';
-// import GithubIcon from '../atoms/common/icons/GithubIcon';
 import HeaderNav from '../organisms/header/HeaderNav';
 import CategoryStatsModal from '../organisms/stats/CategoryStatsModal';
+
 
 function Header() {
   const dispatch = useDispatch();
@@ -39,11 +39,8 @@ function Header() {
             <div className="relative ml-auto hidden items-center lg:flex">
               <nav className="text-sm font-semibold leading-6 text-slate-700">
                 <ul className="flex space-x-8">
-                  <Link to="c">
-                    <li className="hover:text-sky-500">New</li>
-                  </Link>
                   <button type="button" onClick={handleOpenStats}>
-                    <li className="hover:text-sky-500">Stats</li>
+                    <li className="hover:text-sky-500 flex"><ChartBarIcon className="size-5"/>Stats</li>
                   </button>
                   {user?.adminYn === 'Y' ? (
                     <a href={getAdminUrl()} target="_blank" rel="noreferrer">
@@ -56,15 +53,6 @@ function Header() {
                 </ul>
               </nav>
               <div className="ml-6 flex items-center space-x-4 border-l border-slate-200 pl-6">
-                {/* <a
-                  href="https://github.com/garve32"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block text-slate-400 hover:text-slate-500"
-                >
-                  <span className="sr-only">quiz on GitHub</span>
-                  <GithubIcon />
-                </a> */}
                 <a
                   href="https://garve32.tistory.com/"
                   target="_blank"
@@ -77,19 +65,11 @@ function Header() {
             </div>
             {/* 모바일에서도 외부 링크 항상 표시 */}
             <div className="ml-auto flex items-center space-x-3 lg:hidden">
-              {/* <a
-                href="https://github.com/garve32"
-                target="_blank"
-                rel="noreferrer"
-                className="block text-slate-400 hover:text-slate-500"
-                aria-label="GitHub"
-              >
-                <GithubIcon />
-              </a> */}
+
               <nav className="text-sm font-semibold leading-6 text-slate-700">
                 <ul className="flex space-x-8">
                   <button type="button" onClick={handleOpenStats}>
-                    <li className="hover:text-sky-500">Stats</li>
+                    <li className="hover:text-sky-500 flex"><ChartBarIcon className="size-5"/>Stats</li>
                   </button>
                 </ul>
               </nav>

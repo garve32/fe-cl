@@ -29,11 +29,11 @@ function ExplanationSection({ explanation }) {
       <button
         type="button"
         onClick={toggleExplanation}
-        className="flex w-full items-center justify-between rounded-lg bg-green-50 px-2 py-2 text-left text-sm font-medium text-green-900 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+        className="flex w-full items-center justify-between rounded-lg bg-green-100 p-2 text-left text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
       >
         <span className="flex items-center">
           <svg
-            className="mr-2 h-5 w-5 text-green-600"
+            className="mr-2 size-5 text-green-600"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -48,7 +48,7 @@ function ExplanationSection({ explanation }) {
           해설 보기
         </span>
         <svg
-          className={`h-5 w-5 transform transition-transform duration-200 ${
+          className={`size-5 transform transition-transform duration-200 ${
             isVisible ? 'rotate-180' : 'rotate-0'
           }`}
           fill="none"
@@ -70,9 +70,10 @@ function ExplanationSection({ explanation }) {
             <Image src={explanation.image} />
             {explanation.explanation_text && (
               <div className="prose prose-sm max-w-none">
-                <div className="whitespace-pre-wrap text-gray-700 text-sm leading-relaxed">
-                  {explanation.explanation_text}
-                </div>
+                <div 
+                  className="whitespace-pre-wrap text-gray-700 text-sm leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: explanation.explanation_text }}
+                />
               </div>
             )}
           </div>

@@ -7,7 +7,7 @@ import Status from '../../atoms/common/Status';
 
 function QuestionOption({ type, option, handleChange }) {
   const [checked, setChecked] = useState(option.checked);
-  const className = `group pointer-events-auto w-full cursor-pointer whitespace-pre-wrap rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 ${getOptionStyle(
+  const className = `group pointer-events-auto w-full cursor-pointer whitespace-pre-wrap rounded-lg bg-white p-3 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 ${getOptionStyle(
     checked,
     option.correct,
   )} hover:bg-slate-50`;

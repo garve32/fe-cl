@@ -12,6 +12,75 @@ import QuestionContent from '../molecules/question/QuestionContent';
 import QuestionOptions from '../molecules/question/QuestionOptions';
 import ReviewHeader from '../organisms/review/ReviewHeader';
 import ScrollTopButton from '../atoms/common/buttons/ScrollTopButton';
+import Image from '../atoms/common/Image';
+
+// 해설 컴포넌트를 별도로 분리
+function ExplanationSection({ explanation }) {
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  if (!explanation || explanation.use_yn !== 'Y') return null;
+
+  const toggleExplanation = () => {
+    setIsVisible(!isVisible);
+  };
+
+  return (
+    <div className="mt-4 border-t border-gray-200 pt-4">
+      <button
+        type="button"
+        onClick={toggleExplanation}
+        className="flex w-full items-center justify-between rounded-lg bg-green-50 px-2 py-2 text-left text-sm font-medium text-green-900 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+      >
+        <span className="flex items-center">
+          <svg
+            className="mr-2 h-5 w-5 text-green-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          해설 보기
+        </span>
+        <svg
+          className={`h-5 w-5 transform transition-transform duration-200 ${
+            isVisible ? 'rotate-180' : 'rotate-0'
+          }`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+
+      {isVisible && (
+        <div className="mt-3 rounded-lg bg-gray-50 p-4">
+          <div className="space-y-3">
+            <Image src={explanation.image} />
+            {explanation.explanation_text && (
+              <div className="prose prose-sm max-w-none">
+                <div className="whitespace-pre-wrap text-gray-700 text-sm leading-relaxed">
+                  {explanation.explanation_text}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Review() {
   const dispatch = useDispatch();
@@ -142,7 +211,7 @@ function Review() {
       {/* 필터링된 문제 목록 */}
       {isResponsed
         ? filteredResults.map((resultDetail, index) => {
-            const { question, options } = resultDetail;
+            const { question, options, explanation } = resultDetail;
             return (
               <div
                 className="mb-4 overflow-hidden shadow sm:rounded-md"
@@ -165,6 +234,9 @@ function Review() {
                       type={question.type}
                       options={getFormattedOptions(options)}
                     />
+                    
+                    {/* 해설 섹션 추가 */}
+                    <ExplanationSection explanation={explanation} />
                   </div>
                 </div>
               </div>
